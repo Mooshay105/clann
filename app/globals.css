@@ -1,26 +1,509 @@
 @import "tailwindcss";
 
+/* Clann: harled lime ground, peat ink, heather accent. Alegreya to read, Alegreya Sans for interface. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --lime: #eceee8;
+  --paper: #f6f7f3;
+  --ink: #2b2522;
+  --ink-soft: #5a524c;
+  --heather: #6e3b66;
+  --loch: #3e5463;
+  --rule: #c9cec1;
+  --measure: 38rem;
+  --gutter: clamp(1rem, 4vw, 3rem);
+  color-scheme: light;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--lime);
+  color: var(--ink);
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 112.5%; /* 18px */
+  line-height: 1.55;
+  font-kerning: normal;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+a {
+  color: var(--heather);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--heather);
+  outline-offset: 2px;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.15;
+  font-weight: 700;
+  margin: 0;
+}
+
+h2 {
+  font-size: 1.667rem; /* 30 */
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+h3 {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  margin-top: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.skip {
+  position: absolute;
+  left: -999px;
+}
+
+.skip:focus {
+  left: 1rem;
+  top: 1rem;
+  z-index: 10;
+  background: var(--paper);
+  padding: 0.5rem 1rem;
+}
+
+/* ---------- site chrome ---------- */
+
+.site-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem var(--gutter);
+  font-family: var(--font-sans), sans-serif;
+}
+
+.wordmark {
+  font-family: var(--font-serif), serif;
+  font-size: 1.667rem;
+  font-weight: 800;
+  font-style: italic;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.site-head nav {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.site-head nav a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.site-head nav a:hover {
+  text-decoration: underline;
+}
+
+.site-foot {
+  margin-top: 5rem;
+  padding: 1.5rem var(--gutter) 2.5rem;
+  border-top: 1px solid var(--rule);
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.889rem;
+  color: var(--ink-soft);
+}
+
+.site-foot p {
+  max-width: 44rem;
+  margin: 0;
+}
+
+.note {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.889rem;
+  color: var(--ink-soft);
+  max-width: var(--measure);
+}
+
+.lede {
+  font-size: 1.167rem; /* 21 */
+  max-width: var(--measure);
+  margin: 0 0 1.5rem;
+}
+
+/* ---------- the woven band (home hero and clan header) ---------- */
+
+.band {
+  position: relative;
+  min-height: 300px;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 var(--gutter);
+}
+
+.band-cloth {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.band-empty {
+  background: var(--loch);
+}
+
+.plate {
+  position: relative;
+  background: var(--paper);
+  padding: 1.25rem 1.5rem 1.4rem;
+  margin-bottom: -2.5rem;
+  width: min(36rem, 100%);
+  border-top: 6px solid var(--ink);
+  box-shadow: 0 1px 0 var(--rule);
+}
+
+.plate h1 {
+  font-size: clamp(2.333rem, 6vw, 3.333rem); /* 42 → 60 */
+  letter-spacing: -0.015em;
+}
+
+.plate-help {
+  display: block;
+  font-family: var(--font-sans), sans-serif;
+  color: var(--ink-soft);
+  margin: 0.35rem 0 0.75rem;
+}
+
+.plate input {
+  width: 100%;
+  box-sizing: border-box;
+  font: inherit;
+  font-size: 1.333rem; /* 24 */
+  padding: 0.5rem 0.75rem;
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  background: #fff;
+  color: var(--ink);
+}
+
+.plate input::placeholder {
+  color: #8a837d;
+}
+
+.band-caption {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.889rem;
+  color: var(--ink-soft);
+  margin: 3.25rem var(--gutter) 0;
+}
+
+/* ---------- results and the A–Z ---------- */
+
+.results,
+.index,
+.surname,
+.prose {
+  padding: 0 var(--gutter);
+}
+
+.results h2 {
+  margin-top: 1.75rem;
+}
+
+.entries {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: 44rem;
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  column-gap: 1rem;
+  align-items: baseline;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.entry:hover .entry-name {
+  color: var(--heather);
+  text-decoration: underline;
+}
+
+/* The sett laid flat: one gradient per clan. Plain rule when there is no tartan. */
+.selvedge {
+  height: 0.6rem;
+  align-self: center;
+  background: linear-gradient(var(--rule), var(--rule)) center / 100% 1px no-repeat;
+}
+
+.entry-name {
+  font-size: 1.167rem;
+  font-weight: 500;
+}
+
+.entry-meta {
+  grid-column: 2;
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 0.944rem;
+}
+
+.index {
+  margin-top: 4rem;
+}
+
+.index > h2 {
+  font-size: 2rem; /* 36 */
+}
+
+.letters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.9rem;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 1.167rem;
+  margin-bottom: 1rem;
+  position: sticky;
+  top: 0;
+  background: var(--lime);
+  padding: 0.5rem 0;
+  z-index: 1;
+}
+
+.letter {
+  scroll-margin-top: 3.5rem;
+}
+
+.letter h3 {
+  font-family: var(--font-serif), serif;
+  font-size: 2.667rem; /* 48 */
+  font-weight: 800;
+  font-style: italic;
+  color: var(--heather);
+  margin-top: 1.75rem;
+}
+
+/* ---------- clan page ---------- */
+
+.clan-head {
+  position: relative;
+  min-height: 220px;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 var(--gutter);
+}
+
+.clan-body {
+  display: grid;
+  grid-template-columns: minmax(0, var(--measure)) 17rem;
+  grid-template-areas: "main aside";
+  justify-content: start;
+  column-gap: clamp(2rem, 5vw, 5rem);
+  padding: 4rem var(--gutter) 0;
+}
+
+.clan-main {
+  grid-area: main;
+}
+
+.clan-main > section:first-child h2 {
+  margin-top: 0;
+}
+
+.particulars {
+  grid-area: aside;
+  align-self: start;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.944rem;
+}
+
+.particulars img {
+  display: block;
+  width: 9rem;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.particulars dl {
+  margin: 0;
+}
+
+.particulars dl > div {
+  padding: 0.55rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.particulars dt {
+  color: var(--ink-soft);
+  font-size: 0.833rem;
+}
+
+.particulars dd {
+  margin: 0;
+  font-family: var(--font-serif), serif;
+  font-size: 1.056rem;
+}
+
+.particulars q {
+  font-style: italic;
+  quotes: none;
+}
+
+.refs {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.septs {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  columns: 11rem;
+  column-gap: 1.5rem;
+}
+
+.septs li {
+  break-inside: avoid;
+}
+
+.people {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.people li {
+  padding: 0.2rem 0;
+}
+
+.years {
+  color: var(--ink-soft);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.sources ul {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.889rem;
+  padding-left: 1.1rem;
+}
+
+/* ---------- tartan viewer ---------- */
+
+.tartan {
+  margin: 0;
+}
+
+.tartan-pick {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  font-family: var(--font-sans), sans-serif;
+  margin: 0 0 0.6rem;
+}
+
+.tartan-pick select {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  padding: 0.3rem 0.4rem;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  background: #fff;
+  color: var(--ink);
+}
+
+.tartan-cloth {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+}
+
+.tartan figcaption {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 0.889rem;
+  color: var(--ink-soft);
+  margin-top: 0.5rem;
+}
+
+.tartan figcaption strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.threadcount {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.778rem;
+  letter-spacing: 0.02em;
+  word-break: break-word;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+/* ---------- surname and prose pages ---------- */
+
+.surname h1,
+.prose h1 {
+  font-size: clamp(2.667rem, 7vw, 4rem); /* 48 → 72 */
+  letter-spacing: -0.02em;
+  margin: 2rem 0 0.75rem;
+}
+
+.prose p {
+  max-width: var(--measure);
+}
+
+/* ---------- small screens ---------- */
+
+@media (max-width: 52rem) {
+  .clan-body {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "aside" "main";
+    row-gap: 2rem;
+  }
+
+  .particulars dl {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    column-gap: 1.5rem;
+  }
+}
+
+@media (max-width: 30rem) {
+  .entry {
+    grid-template-columns: 2.5rem 1fr;
+  }
+
+  .band {
+    min-height: 220px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
