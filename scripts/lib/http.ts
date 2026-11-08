@@ -8,8 +8,8 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 export const USER_AGENT = "clans-site/0.1 (https://github.com/Mooshay105/clans)";
-const CACHE_DIR = path.resolve(process.cwd(), ".cache");
-const DELAY_MS = 1000;
+let CACHE_DIR = path.resolve(process.cwd(), ".cache");
+let DELAY_MS = 1000;
 const MAX_RETRIES = 6;
 
 let fresh = false;
@@ -18,6 +18,12 @@ export const stats = { network: 0, cached: 0 };
 
 export function setFresh(value: boolean) {
   fresh = value;
+}
+
+/** Override the cache folder and the gap between requests (used by tests). */
+export function configureHttp(options: { cacheDir?: string; delayMs?: number }) {
+  if (options.cacheDir !== undefined) CACHE_DIR = options.cacheDir;
+  if (options.delayMs !== undefined) DELAY_MS = options.delayMs;
 }
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));

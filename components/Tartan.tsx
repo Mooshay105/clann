@@ -8,7 +8,7 @@ import TartanCloth from "./TartanCloth";
 type Tartans = Clan["tartans"];
 
 /** Short label per tartan, unique within the list: variant, then name or source if they differ, then a number. */
-function labels(tartans: Tartans): string[] {
+export function labels(tartans: Tartans): string[] {
   const dedupe = (ls: string[], extra: (i: number) => string) =>
     ls.map((l, i) => {
       const group = ls.flatMap((x, j) => (x === l ? [extra(j)] : []));

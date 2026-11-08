@@ -75,7 +75,8 @@ export function parseClanList(wikitext: string): ListRow[] {
   const start = wikitext.indexOf('{| class="wikitable');
   const end = wikitext.indexOf("\n|}", start);
   const table = wikitext.slice(start, end);
-  const rowsRaw = table.split(/\n\|-[^\n]*/).slice(1);
+  // Each row keeps its "|- style=…" line first: the background colour there gives the region.
+  const rowsRaw = table.split(/\n(?=\|-)/).slice(1);
   const rows: ListRow[] = [];
 
   for (const rowRaw of rowsRaw) {

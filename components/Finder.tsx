@@ -23,7 +23,7 @@ type Result =
   | { kind: "clan"; score: number; clan: ClanSummary }
   | { kind: "surname"; score: number; hit: SurnameHit };
 
-function search(q: string, clans: ClanSummary[], surnames: SurnameHit[]): Result[] {
+export function search(q: string, clans: ClanSummary[], surnames: SurnameHit[]): Result[] {
   if (!q) return [];
   const out: Result[] = [];
   for (const clan of clans) {

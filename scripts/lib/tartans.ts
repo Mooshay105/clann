@@ -137,10 +137,14 @@ export type TartanMatchReport = {
  * Download the CSVs and match tartans to clans.
  * `clanKeys` maps a normalised clan name (see normName) to the slugs that use it.
  */
-export async function matchTartans(clanKeys: Map<string, string[]>) {
+export async function matchTartans(
+  clanKeys: Map<string, string[]>,
+  /** Loads one source CSV. Defaults to the cached download; tests pass their own. */
+  loadCsv: (source: Source, url: string) => Promise<string> = (_source, url) => fetchText({ url }),
+) {
   const sources: { source: Source; rows: Record<string, string>[] }[] = [];
   for (const source of TARTAN_SOURCES) {
-    const text = await fetchText({ url: `${RAW}/data/${source}/data.csv` });
+    const text = await loadCsv(source, `${RAW}/data/${source}/data.csv`);
     sources.push({ source, rows: parseCsv(text) });
   }
 
