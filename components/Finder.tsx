@@ -158,7 +158,7 @@ export default function Finder({
               {surnameResults.map((r) =>
                 r.kind === "surname" ? (
                   <li key={r.hit.key}>
-                    <Link href={`/names/${r.hit.key.replace(/ /g, "-")}`} className="entry">
+                    <Link href={`/names/${r.hit.key.replace(/ /g, "-")}`} className="entry entry-surname">
                       <span className="entry-name">{r.hit.name}</span>
                       <span className="entry-meta">
                         Associated with {listNames(r.hit.clans.map((s) => bySlug.get(s)?.name ?? s))}
