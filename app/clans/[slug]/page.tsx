@@ -94,7 +94,18 @@ export default async function ClanPage({ params }: PageProps<"/clans/[slug]">) {
           <div className="band-cloth band-empty" />
         )}
         <div className="plate">
-          <h1>{clan.name}</h1>
+          <h1>
+            {clan.name.split("/").map((part, i) => (
+              <span key={i}>
+                {i > 0 && (
+                  <>
+                    /<wbr />
+                  </>
+                )}
+                {part}
+              </span>
+            ))}
+          </h1>
           <p className="plate-help">
             {clan.chiefed ? "Chiefed clan" : "Armigerous clan, without a chief"}
           </p>
