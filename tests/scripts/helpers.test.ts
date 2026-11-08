@@ -96,11 +96,11 @@ describe("slugify / clanKey", () => {
 
 describe("deepMerge", () => {
   test("merges nested objects", () => {
-    expect(deepMerge({ a: 1, b: { c: 2, d: 3 } }, { b: { d: 4, e: 5 } })).toEqual({ a: 1, b: { c: 2, d: 4, e: 5 } });
+    expect(deepMerge<unknown>({ a: 1, b: { c: 2, d: 3 } }, { b: { d: 4, e: 5 } })).toEqual({ a: 1, b: { c: 2, d: 4, e: 5 } });
   });
 
   test("null deletes a key", () => {
-    expect(deepMerge({ a: 1, b: 2 }, { b: null })).toEqual({ a: 1 });
+    expect(deepMerge<unknown>({ a: 1, b: 2 }, { b: null })).toEqual({ a: 1 });
   });
 
   test("arrays and scalars are replaced, not merged", () => {

@@ -69,5 +69,4 @@ jobs:
           bun install
       - name: Run Build
         run: |
-          cp .env.example .env.local
           bun run build
