@@ -247,6 +247,15 @@ h3 {
   text-decoration: none;
 }
 
+/* Surnames have no tartan strip: the name gets the first column, wide enough for "Malcolmson". */
+.entry-surname {
+  grid-template-columns: minmax(7rem, 11rem) 1fr;
+}
+
+.entry-surname .entry-meta {
+  grid-column: auto;
+}
+
 .entry:hover .entry-name {
   color: var(--heather);
   text-decoration: underline;
@@ -495,6 +504,14 @@ h3 {
 @media (max-width: 30rem) {
   .entry {
     grid-template-columns: 2.5rem 1fr;
+  }
+
+  .entry-surname {
+    grid-template-columns: 1fr;
+  }
+
+  .entry-surname .entry-meta {
+    grid-column: 1;
   }
 
   .band {
